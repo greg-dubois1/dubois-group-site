@@ -20,7 +20,7 @@
             justify-content: center;
             min-height: 100vh;
             margin: 0;
-            padding: 20px;
+            padding: 30px 20px;
             text-align: center;
             overflow-x: hidden;
         }
@@ -33,46 +33,54 @@
             width: 60px;
             border: 0;
             border-top: 1px solid rgba(255, 255, 255, 0.4);
-            margin: 20px auto;
+            margin: 25px auto;
         }
         .content {
             max-width: 650px;
             margin: 10px 0;
         }
-        .strapline {
-            font-size: 1.1rem;
-            line-height: 1.6;
-            margin-bottom: 25px;
+        p {
+            line-height: 1.8;
+            font-size: 1.05rem;
+            margin-bottom: 20px;
         }
         .slogan {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
             text-transform: uppercase;
             white-space: nowrap;
-            margin: 20px 0;
-            /* Fluid font size tailored for S25 Ultra screen width */
+            margin: 30px 0;
             font-size: clamp(0.65rem, 3.8vw, 1.1rem);
             letter-spacing: clamp(1px, 1.2vw, 4px);
+            display: block;
+        }
+        /* Style for the 'Get in touch' button */
+        .contact-button {
             display: inline-block;
-        }
-        .enquiries {
-            margin-top: 30px;
-            font-weight: 600;
-            font-size: 1rem;
-        }
-        .enquiries a {
+            margin-top: 10px;
+            padding: 12px 30px;
+            border: 1px solid #FFFFFF;
             color: #FFFFFF;
             text-decoration: none;
-            border-bottom: 1px dotted rgba(255,255,255,0.6);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+        }
+        .contact-button:hover {
+            background-color: #FFFFFF;
+            color: #1D3C34;
         }
         .footer {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             opacity: 0.8;
             max-width: 500px;
             padding-top: 10px;
         }
         .copyright {
-            margin-top: 20px;
+            margin-top: 25px;
             font-size: 0.75rem;
             letter-spacing: 1px;
             opacity: 0.6;
@@ -83,28 +91,30 @@
 
     <img src="logo-dubois-stacked.png" alt="Du Bois Group Logo" class="logo">
 
-    <hr> 
-
-    <div class="content">
-        <p class="strapline">
-            <strong>Strategic Clinical Practice &bull; Medical Education &bull; Healthcare Consultancy</strong>
+    <hr> <div class="content">
+        <p>
+            Du Bois Group is an independent healthcare parent company established in 2013, operating across clinical practice, professional education, and specialist consultancy.
         </p>
-        
+
+        <p>
+            The Group provides strategic oversight for a portfolio of specialist brands under the AMEGA name, supporting clinical leadership, workforce capability, and system improvement across urgent, emergency, and advanced care settings.
+        </p>
+
+        <p><strong>Website coming soon.</strong></p>
+
         <div class="slogan">
             PRACTICE &middot; EDUCATE &middot; CONSULT
         </div>
 
-        <p style="margin-top: 20px; opacity: 0.9;">Website coming soon.</p>
-        
-        <div class="enquiries">
-            Enquiries: <a href="mailto:hello@duboisgroup.uk">hello@duboisgroup.uk</a>
+        <div class="contact">
+            <a href="mailto:hello@duboisgroup.uk" class="contact-button">
+                Get in touch
+            </a>
         </div>
     </div>
 
-    <hr> 
-
-    <div class="footer">
-        Du Bois Group is the parent company. AMEGA operates as a trading name under the Group.
+    <hr> <div class="footer">
+        Du Bois Group is the parent company. AMEGA operates as a trading name within the Group.
     </div>
 
     <div class="copyright">
