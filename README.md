@@ -1,2 +1,12 @@
-# dubois-group-site
-Strategic Clinical Practice, Education &amp; Consultancy | Home of the AMEGA Brand Portfolio
+# Du Bois Group | Asset Repository
+
+This repository hosts the digital assets and web infrastructure for the **Du Bois Group**.
+
+## Brand Architecture
+* **Du Bois Clinical Services:** Advanced practice and specialist clinical delivery.
+* **AMEGA Training:** Specialist clinical education, mentoring, and digital learning.
+* **Axiom Consultancy:** Quality Improvement (QI) and Digital Transformation advisory.
+
+## Contact
+Enquiries: [hello@duboisgroup.uk](mailto:hello@duboisgroup.uk)
+Web: [www.duboisgroup.uk](https://www.duboisgroup.uk)
