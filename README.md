@@ -5,7 +5,7 @@ This repository hosts the digital assets and web infrastructure for the **Du Boi
 ## Brand Architecture
 * **Du Bois Clinical Services:** Advanced practice and specialist clinical delivery.
 * **AMEGA Training:** Specialist clinical education, mentoring, and digital learning.
-* **Axiom Consultancy:** Quality Improvement (QI) and Digital Transformation advisory.
+* **Axiom Consulting:** Quality Improvement (QI) and Digital Transformation advisory.
 
 ## Contact
 Enquiries: [hello@duboisgroup.uk](mailto:hello@duboisgroup.uk)
