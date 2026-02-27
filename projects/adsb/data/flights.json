@@ -1,0 +1,16 @@
+[
+  {
+    "hex": "406ABC",
+    "callsign": "BAW123",
+    "altitude": 32000,
+    "speed": 450,
+    "distance_nm": 12.4
+  },
+  {
+    "hex": "4CA123",
+    "callsign": "RYR456",
+    "altitude": 21000,
+    "speed": 380,
+    "distance_nm": 34.8
+  }
+]
