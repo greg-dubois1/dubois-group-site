@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADS‑B | Du Bois Group</title>
 
-    <meta name="description" content="Live ADS‑B map and local flight data from 'T-EGCC989' receiver setup, using tar1090 and PiAware.">
+    <meta name="description" content="Live ADS‑B receiver view from Greg Du Bois' setup, embedded from PiAware with Du Bois Group branding.">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
@@ -14,7 +14,7 @@
         :root {
             --bg: #1D3C34;      /* dark evergreen */
             --text: #FFFFFF;
-            --accent: #0CD268;  /* vivid green */
+            --accent: #0CD268;  /* vivid spring green */
         }
 
         * {
@@ -32,10 +32,11 @@
         }
 
         header {
-            padding: 16px 18px;
+            padding: 14px 18px;
             display: flex;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+            background-color: #143027;
         }
 
         .logo {
@@ -44,117 +45,61 @@
             margin-right: 14px;
         }
 
-        .site-title {
+        .brand-main {
             font-family: 'Montserrat', sans-serif;
             font-weight: 700;
-            font-size: 0.9rem;
-            letter-spacing: 3px;
-            text-transform: uppercase;
-            opacity: 0.9;
-        }
-
-        .site-subtitle {
-            font-size: 0.8rem;
-            opacity: 0.6;
-        }
-
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .layout {
-            display: flex;
-            flex: 1;
-            min-height: 0;
-        }
-
-        .map-panel, .info-panel {
-            padding: 10px;
-        }
-
-        .map-panel {
-            flex: 3;
-        }
-
-        .info-panel {
-            flex: 2;
-            border-left: 1px solid rgba(255,255,255,0.15);
-            display: flex;
-            flex-direction: column;
-            min-width: 340px;
-        }
-
-        .panel-title {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 1rem;
             letter-spacing: 2px;
-            text-transform: none;
-            margin-bottom: 8px;
+            text-transform: none; /* sentence case name */
+        }
+
+        .brand-sub {
+            font-size: 0.8rem;
             opacity: 0.7;
         }
 
-        .iframe-wrapper {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            min-height: 360px;
-            background: #10201C;
-            border: 1px solid rgba(255,255,255,0.15);
-        }
-
-        iframe {
-            border: none;
-            width: 100%;
-            height: 100%;
-        }
-
-        .links-section {
-            padding: 14px 14px 18px;
-            border-top: 1px solid rgba(255,255,255,0.15);
+        .links-bar {
+            padding: 10px 18px 6px;
+            border-bottom: 1px solid rgba(255,255,255,0.18);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .links-title {
             font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem;
+            text-transform: uppercase;
             letter-spacing: 2px;
-            text-transform: none;
-            margin-bottom: 10px;
             opacity: 0.7;
+            margin-right: 18px;
         }
 
         .links-list a {
-            display: block;
-            margin-bottom: 6px;
             color: var(--accent);
             text-decoration: none;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
         }
 
         .links-list a:hover {
             text-decoration: underline;
         }
 
-        .note {
-            font-size: 0.8rem;
-            opacity: 0.6;
-            margin-top: 8px;
+        .viewer-shell {
+            flex: 1;
+            padding: 10px;
         }
 
-        @media (max-width: 900px) {
-            .layout {
-                flex-direction: column;
-            }
-            .info-panel {
-                border-left: none;
-                border-top: 1px solid rgba(255,255,255,0.15);
-                min-width: 0;
-            }
-            .iframe-wrapper {
-                min-height: 260px;
+        .viewer-frame {
+            width: 100%;
+            height: calc(100vh - 120px); /* header + links approx */
+            border: 1px solid rgba(255,255,255,0.18);
+            background: #000;
+        }
+
+        @media (max-width: 800px) {
+            .viewer-frame {
+                height: calc(100vh - 150px);
             }
         }
     </style>
@@ -162,107 +107,41 @@
 <body>
 
 <header>
-    <!-- Replace src with the deployed logo path if needed -->
     <a href="/" aria-label="Du Bois Group home">
         <img src="/logo-dubois-stacked.png" alt="Du Bois Group" class="logo">
     </a>
     <div>
-        <div class="site-title">Du Bois Group</div>
-        <div class="site-subtitle">Live ADS‑B Receiver · Experimental Project</div>
+        <div class="brand-main">Du Bois Group</div>
+        <div class="brand-sub">Live ADS‑B Receiver · Experimental Project</div>
     </div>
 </header>
 
-<main>
-
-    <div class="layout">
-
-                <!-- LEFT: table built from JSON -->
-        <aside class="info-panel" aria-label="Live table from JSON">
-            <div class="panel-title">Live Flight Data (Table)</div>
-            <div class="iframe-wrapper" style="padding: 10px; overflow: auto;">
-                <table id="flights-table" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
-                    <thead>
-                        <tr>
-                            <th style="text-align:left; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Callsign</th>
-                            <th style="text-align:left; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Hex</th>
-                            <th style="text-align:right; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Alt (ft)</th>
-                            <th style="text-align:right; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Speed (kt)</th>
-                            <th style="text-align:right; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Dist (NM)</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td colspan="5" style="padding: 8px 6px; opacity: 0.6;">Loading flight data…</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </aside>
-
-
-        <!-- RIGHT: tar1090 map -->
-        <section class="map-panel" aria-label="Live ADS-B map">
-            <div class="panel-title">Live Map (tar1090)</div>
-            <div class="iframe-wrapper">
-                <iframe
-                    src="http://192.168.68.79/tar1090/"
-                    title="tar1090 live map"
-                    loading="lazy">
-                </iframe>
-            </div>
-        </section>
-
+<div class="links-bar">
+    <div class="links-title">Learn more</div>
+    <div class="links-list">
+        <a href="/projects/adsb/what-is-adsb">What is ADS‑B?</a>
+        &nbsp;·&nbsp;
+        <a href="/projects/adsb/how-it-works">How does it work?</a>
+        &nbsp;·&nbsp;
+        <a href="/projects/adsb/my-setup">What is my setup?</a>
     </div>
+</div>
 
-    <!-- LINKS UNDERNEATH -->
-    <section class="links-section">
-        <div class="links-title">Learn More</div>
-        <div class="links-list">
-            <a href="/projects/adsb/what-is-adsb">What is ADS‑B?</a>
-            <a href="/projects/adsb/how-it-works">How does it work?</a>
-            <a href="/projects/adsb/my-setup">What is my setup?</a>
-        </div>
-        <div class="note">
-            These links will point to additional pages under <code>/projects/adsb/</code> as they are written.
-        </div>
-    </section>
+<div class="viewer-shell">
+    <!--
+      This shows the entire PiAware / SkyAware page (map + table) in one iframe.
 
-</main>
-<script>
-(async function () {
-    const tableBody = document.querySelector('#flights-table tbody');
-    try {
-        const response = await fetch('/projects/adsb/data/flights.json');
-        if (!response.ok) throw new Error('HTTP ' + response.status);
-        const flights = await response.json();
-
-        if (!Array.isArray(flights) || flights.length === 0) {
-            tableBody.innerHTML = '<tr><td colspan="5" style="padding:8px 6px; opacity:0.6;">No flights in view.</td></tr>';
-            return;
-        }
-
-        tableBody.innerHTML = flights.map(f => {
-            const callsign = (f.callsign || '').trim() || '—';
-            const hex = f.hex || '—';
-            const alt = f.altitude != null ? f.altitude.toLocaleString() : '—';
-            const spd = f.speed != null ? f.speed : '—';
-            const dist = f.distance_nm != null ? f.distance_nm.toFixed(1) : '—';
-            return `
-                <tr>
-                    <td style="padding:3px 6px;">${callsign}</td>
-                    <td style="padding:3px 6px; opacity:0.8;">${hex}</td>
-                    <td style="padding:3px 6px; text-align:right;">${alt}</td>
-                    <td style="padding:3px 6px; text-align:right;">${spd}</td>
-                    <td style="padding:3px 6px; text-align:right;">${dist}</td>
-                </tr>
-            `;
-        }).join('');
-    } catch (err) {
-        console.error(err);
-        tableBody.innerHTML = '<tr><td colspan="5" style="padding:8px 6px; opacity:0.8;">Unable to load data.</td></tr>';
-    }
-})();
-</script>
+      Replace src below with whatever URL serves it.
+      If 192.168.68.79:8080 is only reachable on the home network,
+      the embed will only work from that network unless exposed via a public URL.
+    -->
+    <iframe
+        src="http://192.168.68.79:8080/"
+        class="viewer-frame"
+        title="PiAware live ADS-B view"
+        loading="lazy">
+    </iframe>
+</div>
 
 </body>
 </html>
