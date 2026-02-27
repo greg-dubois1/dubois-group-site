@@ -176,16 +176,28 @@
 
     <div class="layout">
 
-        <!-- MAP: tar1090 -->
+        <!-- LEFT: table / JSON data -->
+        <aside class="info-panel" aria-label="Live table and JSON data">
+            <div class="panel-title">Live Flight Data (Table)</div>
+            <div class="iframe-wrapper">
+                <!--
+                  Replace src below with the URL that serves your table / JSON view.
+                  Examples:
+                  - A tar1090 "table" view if you expose it separately
+                  - A small custom page that renders JSON into a table
+                -->
+                <iframe
+                    src="http://192.168.68.79:8080/data/"
+                    title="Live flight data table"
+                    loading="lazy">
+                </iframe>
+            </div>
+        </aside>
+
+        <!-- RIGHT: tar1090 map -->
         <section class="map-panel" aria-label="Live ADS-B map">
             <div class="panel-title">Live Map (tar1090)</div>
             <div class="iframe-wrapper">
-                <!--
-                  IMPORTANT:
-                  - If tar1090 is exposed via a public URL, put it in src below.
-                  - If it is only on the home network, this will only work when
-                    viewing the page from that network.
-                -->
                 <iframe
                     src="http://192.168.68.79/tar1090/"
                     title="tar1090 live map"
@@ -193,27 +205,6 @@
                 </iframe>
             </div>
         </section>
-
-        <!-- SIDE PANEL: chart / stats -->
-        <aside class="info-panel" aria-label="Live chart and stats">
-            <div class="panel-title">Live Flight Data</div>
-            <div class="iframe-wrapper">
-                <!--
-                  Replace src with whatever provides the chart / table.
-
-                  Examples:
-                  - If using PiAware / SkyAware stats page:
-                      src="http://192.168.68.79:8080/"
-
-                  - If using a separate tar1090 chart view, put that URL instead.
-                -->
-                <iframe
-                    src="http://192.168.68.79:8080/"
-                    title="PiAware / SkyAware stats"
-                    loading="lazy">
-                </iframe>
-            </div>
-        </aside>
 
     </div>
 
