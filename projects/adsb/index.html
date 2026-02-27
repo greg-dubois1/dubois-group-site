@@ -91,7 +91,7 @@
             font-weight: 700;
             font-size: 0.8rem;
             letter-spacing: 2px;
-            text-transform: uppercase;
+            text-transform: none;
             margin-bottom: 8px;
             opacity: 0.7;
         }
@@ -121,7 +121,7 @@
             font-weight: 700;
             font-size: 0.8rem;
             letter-spacing: 2px;
-            text-transform: uppercase;
+            text-transform: none;
             margin-bottom: 10px;
             opacity: 0.7;
         }
@@ -176,23 +176,29 @@
 
     <div class="layout">
 
-        <!-- LEFT: table / JSON data -->
-        <aside class="info-panel" aria-label="Live table and JSON data">
+                <!-- LEFT: table built from JSON -->
+        <aside class="info-panel" aria-label="Live table from JSON">
             <div class="panel-title">Live Flight Data (Table)</div>
-            <div class="iframe-wrapper">
-                <!--
-                  Replace src below with the URL that serves your table / JSON view.
-                  Examples:
-                  - A tar1090 "table" view if you expose it separately
-                  - A small custom page that renders JSON into a table
-                -->
-                <iframe
-                    src="http://192.168.68.79:8080/data/"
-                    title="Live flight data table"
-                    loading="lazy">
-                </iframe>
+            <div class="iframe-wrapper" style="padding: 10px; overflow: auto;">
+                <table id="flights-table" style="width: 100%; border-collapse: collapse; font-size: 0.85rem;">
+                    <thead>
+                        <tr>
+                            <th style="text-align:left; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Callsign</th>
+                            <th style="text-align:left; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Hex</th>
+                            <th style="text-align:right; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Alt (ft)</th>
+                            <th style="text-align:right; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Speed (kt)</th>
+                            <th style="text-align:right; padding: 4px 6px; border-bottom: 1px solid rgba(255,255,255,0.2);">Dist (NM)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td colspan="5" style="padding: 8px 6px; opacity: 0.6;">Loading flight data…</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </aside>
+
 
         <!-- RIGHT: tar1090 map -->
         <section class="map-panel" aria-label="Live ADS-B map">
@@ -222,6 +228,41 @@
     </section>
 
 </main>
+<script>
+(async function () {
+    const tableBody = document.querySelector('#flights-table tbody');
+    try {
+        const response = await fetch('/projects/adsb/data/flights.json');
+        if (!response.ok) throw new Error('HTTP ' + response.status);
+        const flights = await response.json();
+
+        if (!Array.isArray(flights) || flights.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="5" style="padding:8px 6px; opacity:0.6;">No flights in view.</td></tr>';
+            return;
+        }
+
+        tableBody.innerHTML = flights.map(f => {
+            const callsign = (f.callsign || '').trim() || '—';
+            const hex = f.hex || '—';
+            const alt = f.altitude != null ? f.altitude.toLocaleString() : '—';
+            const spd = f.speed != null ? f.speed : '—';
+            const dist = f.distance_nm != null ? f.distance_nm.toFixed(1) : '—';
+            return `
+                <tr>
+                    <td style="padding:3px 6px;">${callsign}</td>
+                    <td style="padding:3px 6px; opacity:0.8;">${hex}</td>
+                    <td style="padding:3px 6px; text-align:right;">${alt}</td>
+                    <td style="padding:3px 6px; text-align:right;">${spd}</td>
+                    <td style="padding:3px 6px; text-align:right;">${dist}</td>
+                </tr>
+            `;
+        }).join('');
+    } catch (err) {
+        console.error(err);
+        tableBody.innerHTML = '<tr><td colspan="5" style="padding:8px 6px; opacity:0.8;">Unable to load data.</td></tr>';
+    }
+})();
+</script>
 
 </body>
 </html>
