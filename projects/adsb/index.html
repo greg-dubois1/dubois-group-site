@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ADS‑B | Du Bois Group</title>
 
-    <meta name="description" content="Live ADS‑B receiver view from Greg Du Bois' setup, embedded from PiAware with Du Bois Group branding.">
+    <meta name="description" content="Live Du Bois Group ADS‑B Radar' setup, embedded from PiAware.">
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Open+Sans&display=swap" rel="stylesheet">
@@ -46,7 +46,7 @@
         }
 
         .brand-main {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'viewport', sans-serif;
             font-weight: 700;
             font-size: 1rem;
             letter-spacing: 2px;
@@ -67,7 +67,7 @@
         }
 
         .links-title {
-            font-family: 'Montserrat', sans-serif;
+            font-family: 'viewport', sans-serif;
             font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -129,16 +129,15 @@
 
 <div class="viewer-shell">
     <!--
-      This shows the entire Tar1090 page (map + table) in one iframe.
+      This shows the entire Piaware page (map + table) in one iframe.
 
       Replace src below with whatever URL serves it.
-      If 192.168.68.79:8080 is only reachable on the home network,
-      the embed will only work from that network unless exposed via a public URL.
+      Served by 192.168.68.79:8080 with public channel exposed by Cloudflare Tunnel via a public URL.
     -->
     <iframe
-        src="adsb.duboisgroup.uk"
+        src="https://adsb.duboisgroup.uk"
         class="viewer-frame"
-        title="Tar1090 ADS-B Radar T-EGCC989"
+        title="Du Bois Group Live ADS-B Radar - T-EGCC989"
         loading="lazy">
     </iframe>
 </div>
