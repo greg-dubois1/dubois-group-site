@@ -23,7 +23,6 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
             min-height: 100vh;
             margin: 0;
             padding: 30px 20px;
@@ -42,7 +41,7 @@
             margin: 25px auto;
         }
         .content {
-            max-width: 650px;
+            max-width: 1000px;
             margin: 10px 0;
         }
         p {
@@ -51,21 +50,24 @@
             margin-bottom: 20px;
         }
         .domains-wrapper {
-            margin-top: 25px;
+            margin-top: 40px;
+            align-items: center;
+            margin-bottom: 20px;
         }
         .domains-grid {
             display: flex;
+            margin-left: 100px; 
+            margin-right: 100px
             flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            text-align: left;
+            gap: 80px;
+            text-align: center;
         }
         .domain-card {
             flex: 1 1 200px;
             max-width: 220px;
         }
         .domain-card img {
-            max-width: 150px;
+            max-width: 220px;
             height: auto;
             margin-bottom: 8px;
         }
@@ -76,20 +78,12 @@
         .domain-text {
             font-size: 0.95rem;
             line-height: 1.6;
-        }    
-        .slogan {
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            white-space: nowrap;
-            margin: 30px 0;
-            font-size: clamp(0.65rem, 3.8vw, 1.1rem);
-            letter-spacing: clamp(1px, 1.2vw, 4px);
-            display: block;
+            text-align:center;
         }
         .contact-button {
             display: inline-block;
-            margin-top: 10px;
+            margin-top: 20px;
+            margin-bottom: 40px;
             padding: 12px 30px;
             border: 1px solid #FFFFFF;
             color: #FFFFFF;
@@ -105,17 +99,27 @@
             background-color: #FFFFFF;
             color: #1D3C34;
         }
+        .slogan {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            white-space: nowrap;
+            margin: 10px 0;
+            font-size: clamp(1.5rem, 3.8vw, 1.5rem);
+            letter-spacing: clamp(4px, 3vw, 4px);
+            display: block;
+        }
         .footer {
-            font-size: 0.85rem;
+            font-size: 0.6rem;
             opacity: 0.8;
-            max-width: 500px;
-            padding-top: 10px;
+            max-width: 1000px;
+            margin-top: 20px;
         }
         .copyright {
-            margin-top: 25px;
-            font-size: 0.75rem;
+            margin-top: 15px;
+            font-size: 0.6rem;
             letter-spacing: 1px;
-            opacity: 0.6;
+            opacity: 0.8;
         }
     </style>
 </head>
@@ -146,7 +150,7 @@
                 <div class="domains-grid">
                     <div class="domain-card">
                         <img src="images/logo-DB-practice-800.png" alt="Practice Logo">
-                        <div class="domain-title">PRACTICE: DBG Clinical Services</div>
+                        <div class="domain-title">DBG Clinical Services</div>
                         <div class="domain-text">
                             Advanced clinical and specialist paramedic services across primary, urgent, and emergency care settings.
                         </div>
@@ -154,7 +158,7 @@
 
                     <div class="domain-card">
                         <img src="images/logo-DB-educate-800.png" alt="Educate Logo">
-                            <div class="domain-title">EDUCATE: AMEGA Training</div>
+                            <div class="domain-title">AMEGA Training</div>
                             <div class="domain-text">
                                 Professional education and training courses, mentoring &amp; coaching, educational resources and portfolio development services.
                             </div>
@@ -162,40 +166,35 @@
                     
                     <div class="domain-card">
                         <img src="images/logo-DB-coach-800.png" alt="Coach Logo">
-                            <div class="domain-title">COACH: Axiom Coaching</div>
+                            <div class="domain-title">Axiom Coaching</div>
                             <div class="domain-text">
                                 Healthcare leadership and productivity coaching, aimed at supporting and safeguarding expert care and clinical practice and service efficiency.
                             </div>
                         </div>
                     </div>
                 </div>
-                <p>
-                    The Du Bois Group provides clarity, continuity, and governance for work evolved over a decade of specialist experience.
-                </p>
             </div>
-
-            <div class="slogan">
-                PRACTICE &middot; EDUCATE &middot; COACH
-            </div>
-
+            <p>
+                The Du Bois Group provides clarity, continuity, and governance for work evolved over a decade of specialist experience.
+            </p>
+        </div>
         <div class="contact">
-            <a href="mailto:hello@duboisgroup.uk" class="contact-button">
-                Get in touch
-            </a>
+        <a href="mailto:hello@duboisgroup.uk" class="contact-button">
+            Get in touch
+        </a>
         </div>
     </div>
-
+    <div class="slogan">
+        PRACTICE &middot; EDUCATE &middot; COACH
+    </div>
+    </div>
     <hr>
-
     <div class="footer">
-        <strong>Legal disclosure:</strong><br>
-        Du Bois Group serves as the professional structure for the practice, education, and coaching work of Greg Du Bois (Director &amp; Advanced Paramedic Practitioner).
+        <strong>Du Bois Group</strong> serves as the professional structure for the practice, education, and coaching work of Greg Du Bois (Director &amp; Advanced Paramedic Practitioner).
         AMEGA Training and Axiom Coaching operate as specialist service lines within Du Bois Group.
     </div>
-
     <div class="copyright">
         &copy; 2026 Du Bois Group
     </div>
-
 </body>
 </html>
